@@ -17,7 +17,7 @@ public class SwaggerConfig {
                         .version("v0.0.1")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("Customers microservice")
+                        .description("Cars microservice")
                         .url("https://github.com/Apolosmllb/springboot-microservice-cars.git"));
     }
 }

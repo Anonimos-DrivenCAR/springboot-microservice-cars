@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 @Table(name = "categories")
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_category")
@@ -18,7 +17,6 @@ public class Category {
 
     @Column(name = "is_available")
     private boolean isAvailable;
-
 
     @JsonIgnore
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)

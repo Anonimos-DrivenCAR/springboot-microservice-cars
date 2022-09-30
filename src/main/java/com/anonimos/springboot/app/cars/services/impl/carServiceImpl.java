@@ -1,8 +1,6 @@
 package com.anonimos.springboot.app.cars.services.impl;
-
 import com.anonimos.springboot.app.cars.entity.Car;
 import com.anonimos.springboot.app.cars.repository.CarRepository;
-
 import com.anonimos.springboot.app.cars.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

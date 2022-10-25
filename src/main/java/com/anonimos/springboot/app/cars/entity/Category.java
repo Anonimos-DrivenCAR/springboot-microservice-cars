@@ -1,6 +1,5 @@
 package com.anonimos.springboot.app.cars.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

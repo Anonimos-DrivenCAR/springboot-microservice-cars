@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
         void setup(){
             MockitoAnnotations.openMocks(this);
 
-            car= new Car(1L);
+            car= new Car();
             car.setBrand("Chevrolet 12");
             car.setCarType(CarType.Coupe);
             car.setColor("Red");
@@ -41,10 +41,10 @@ import static org.mockito.Mockito.when;
             car.setMileage(123);
             car.setEngineSize(123);
             car.setProductionYear(2020);
-            car.setCategory(new Category());
+            //car.setCategory(new Category());
             car.setPower(123);
 
-            car2= new Car(2L);
+            car2= new Car();
             car2.setBrand("Chevrolet 15");
             car2.setCarType(CarType.Minivan);
             car2.setColor("Blue");
@@ -52,7 +52,7 @@ import static org.mockito.Mockito.when;
             car2.setMileage(1243);
             car2.setEngineSize(1253);
             car2.setProductionYear(2050);
-            car2.setCategory(new Category());
+            //car2.setCategory(new Category());
             car2.setPower(1253);
 
         }

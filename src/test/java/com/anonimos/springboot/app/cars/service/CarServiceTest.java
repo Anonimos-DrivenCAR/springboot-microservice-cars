@@ -36,18 +36,17 @@ public class CarServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        car= new Car(11L);
-        car.setCategory(new Category());
+        car= new Car();
+        //car.setCategory(new Category());
         car.setModel("BMV series 1");
         car.setBrand("BMV");
-        car.setIdCategory(10);
         car.setColor("Blue");
         car.setEngineSize(42);
         car.setPower(23);
         car.setCarType(CarType.Convertible);
         car.setMileage(123123);
 
-        car2=new Car(12L);
+        car2=new Car();
         car2.setBrand("TOYOTA");
         car2.setModel("LAST MODEL");
         car2.setProductionYear(2025);
@@ -56,7 +55,7 @@ public class CarServiceTest {
         car2.setPower(55);
         car2.setCarType(CarType.Crossover);
         car2.setMileage(22322);
-        car2.setIdCategory(12);
+
     }
 
     @Test

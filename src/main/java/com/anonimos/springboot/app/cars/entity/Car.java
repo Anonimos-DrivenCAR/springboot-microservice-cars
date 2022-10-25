@@ -20,8 +20,7 @@ public class Car {
     private Long idCar;
     @Column(name="brand")
     private String brand;
-    @Column(name = "id_category")
-    private Integer idCategory;
+
     @Column(name="model")
     private String model;
     @Column(name="production_year")
@@ -48,6 +47,8 @@ public class Car {
             orphanRemoval = true
     )
     private List<Category> categories = new ArrayList<>();
+
+
 
     public void addCategory(Category category) {
         categories.add(category);

@@ -57,7 +57,7 @@ public class carServiceImpl implements CarService {
       return carRepository.findById(id).map(
              car -> {
                 car.setBrand(newCar.getBrand());
-                car.setIdCategory(newCar.getIdCategory());
+                //car.setIdCategory(newCar.getIdCategory());
                 car.setModel(newCar.getModel());
                 car.setProductionYear(newCar.getProductionYear());
                 car.setColor(newCar.getColor());

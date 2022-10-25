@@ -75,7 +75,7 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content) })
     @GetMapping("productionYear/{productionYear}")
-    public List<Car> getById(@PathVariable int  productionYear){
+    public List<Car> getByProductionYear(@PathVariable int  productionYear){
         return carService.findCarsByProductionYear(productionYear);
     }
 
@@ -84,6 +84,7 @@ public class CarController {
             @ApiResponse(responseCode = "201", description = "Car registrado", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content) })
+
     @PostMapping("/save/new-car")
     public ResponseEntity<Car> newUser(@RequestBody Car car){
         return new ResponseEntity<>(carService.saveCar(car), HttpStatus.CREATED);

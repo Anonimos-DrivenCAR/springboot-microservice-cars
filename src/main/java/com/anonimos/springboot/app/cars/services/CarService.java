@@ -12,6 +12,7 @@ public interface CarService {
     public Optional <Car> findCar(Long id);
     public List<Car> findCarsByProductionYear(int productionYear);
     public Car saveCar(Car car);
-    public void deleteCar(Long idCar);
+    public void deleteCar(Long id);
     public Car updateCar(Car newCar,Long id);
+
 }

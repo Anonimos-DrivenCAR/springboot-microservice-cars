@@ -18,7 +18,7 @@ public class carServiceImpl implements CarService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Car> findAllCars() {
+    public List<Car> findAll() {
       return (List<Car>) carRepository.findAll();
     }
     @Override
@@ -32,7 +32,7 @@ public class carServiceImpl implements CarService {
     }
     @Override
     @Transactional(readOnly = true)
-    public Optional<Car> findCar(Long id) {
+    public Optional<Car> findById(Long id) {
        return Optional.ofNullable(carRepository.findById(id).orElse(null));
     }
     @Override

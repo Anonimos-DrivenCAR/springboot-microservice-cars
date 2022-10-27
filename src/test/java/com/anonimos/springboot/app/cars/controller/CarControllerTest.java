@@ -9,14 +9,19 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
  class CarControllerTest {
@@ -29,9 +34,11 @@ import static org.mockito.Mockito.when;
 
         private Car car;
         private Car car2;
+        private BindingResult result;
         @BeforeEach
         void setup(){
             MockitoAnnotations.openMocks(this);
+
 
             car= new Car();
             car.setBrand("Chevrolet 12");
@@ -41,7 +48,6 @@ import static org.mockito.Mockito.when;
             car.setMileage(123);
             car.setEngineSize(123);
             car.setProductionYear(2020);
-            //car.setCategory(new Category());
             car.setPower(123);
 
             car2= new Car();
@@ -59,7 +65,7 @@ import static org.mockito.Mockito.when;
 
         @Test
         void findAllCars() {
-            when(carService.findAllCars()).thenReturn(Collections.singletonList(car));
+            when(carService.findAll()).thenReturn(Collections.singletonList(car));
             assertNotNull(carController.getAll());
         }
 
@@ -79,40 +85,47 @@ import static org.mockito.Mockito.when;
         @Test
         void getByProductionYear() {
             when(carService.findCarsByProductionYear(car.getProductionYear())).thenReturn(Collections.singletonList(car));
-            assertNotNull(carController.getById(anyInt()));
+            assertNotNull(carController.getById (anyLong()));
         }
 
         @Test
         void GetById() {
-            when(carService.findCar(1L)).thenReturn(Optional.ofNullable(car));
+            when(carService.findById(1L)).thenReturn(Optional.ofNullable(car));
             assertNotNull(carController.getById(1L));
 
         }
 
         @Test
         void newCar() {
+            BindingResult result = mock(BindingResult.class);
+            when(result.hasErrors()).thenReturn(true);
+
             when(carService.saveCar(any(Car.class))).thenReturn(car);
-            assertNotNull(carController.newUser(any()));
+            assertNotNull(carController.newCar(car,result));
         }
 
 
         @Test
         void replaceCar() {
+            BindingResult result = mock(BindingResult.class);
+            when(result.hasErrors()).thenReturn(true);
+
             when(carService.updateCar(car,1L)).thenReturn(car);
-            assertNotNull(carController.updateCar(car2,1L));
+            assertNotNull(carController.update(1L,car,result));
+
         }
 
         @Test
         void deleteCar() {
-            when(carService.findCar(1L)).thenReturn(Optional.ofNullable(car));
-            Optional<Car> found_car=carController.getById(1L);
+            /*when(carService.findById(1L)).thenReturn(Optional.ofNullable(car));
+            ResponseEntity<?> found_car=carController.getById(1L);
             carService.deleteCar(1L);
-            Optional<Car> deleted=null;
+            ResponseEntity<?> deleted=null;
             carController.deleteCar(1L);
             found_car=deleted;
-            when(carService.findCar(1L)).thenReturn(found_car);
+            when(carService.findById(1L)).thenReturn(found_car);
 
-            assertNull(carController.getById(1L));
+            assertNull(carController.getById(1L));*/
         }
 }
 

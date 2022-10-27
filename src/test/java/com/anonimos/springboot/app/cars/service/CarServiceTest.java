@@ -61,7 +61,7 @@ public class CarServiceTest {
     @Test
     void findAllCars() {
         when(carRepository.findAll()).thenReturn(Arrays.asList(car,car2));
-        assertNotNull(carService.findAllCars());
+        assertNotNull(carService.findAll());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class CarServiceTest {
     @Test
     void deleteCar() {
         when(carRepository.findById(12L)).thenReturn(Optional.ofNullable(car2));
-        Optional<Car> foundcar=carService.findCar(12L);
+        Optional<Car> foundcar=carService.findById(12L);
         carRepository.deleteById(12L);
         Optional<Car> deleted=null;
         carService.deleteCar(12L);
@@ -87,7 +87,7 @@ public class CarServiceTest {
     void updateCar(){
         when(carRepository.findById(11L)).thenReturn(Optional.ofNullable(car));
 
-        Optional<Car> new_car= carService.findCar(11L);
+        Optional<Car> new_car= carService.findById(11L);
         new_car.get().setBrand(car2.getBrand());
         new_car.get().setModel(car2.getModel());
         new_car.get().setProductionYear(car2.getProductionYear());
@@ -119,7 +119,7 @@ public class CarServiceTest {
     void findCarById_success() {
         when(carRepository.findById(car.getIdCar())).thenReturn(Optional.ofNullable(car)
         );
-        assertNotNull(carService.findCar(car.getIdCar()));
+        assertNotNull(carService.findById(car.getIdCar()));
     }
 
     @Test

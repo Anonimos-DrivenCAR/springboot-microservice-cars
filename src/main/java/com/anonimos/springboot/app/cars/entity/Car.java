@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,27 +20,37 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_car")
     private Long idCar;
+
     @Column(name="brand")
+    @NotBlank
     private String brand;
 
     @Column(name="model")
+    @NotBlank
     private String model;
+
     @Column(name="production_year")
+    @NotNull
     private int productionYear;
 
     @Enumerated(EnumType.STRING)
+    @NotBlank
     private CarType carType;
 
     @Column(name="color")
+    @NotBlank
     private String color;
 
     @Column(name="engine_Size")
+    @NotNull
     private int engineSize;
 
     @Column(name="power")
+    @NotBlank
     private int power;
 
     @Column(name="mileage")
+    @NotNull
     private int mileage;
 
     @OneToMany(

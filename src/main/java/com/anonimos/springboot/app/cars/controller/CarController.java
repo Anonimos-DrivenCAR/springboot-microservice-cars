@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/cars")
 @Tag(name = "Cars", description = "service Web RESTFull de cars")
 public class CarController {
 
@@ -59,7 +58,7 @@ public class CarController {
             @ApiResponse(responseCode = "201", description = "Car encontrado", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content) })*/
-    @GetMapping("/brand/{brand}")
+    @GetMapping("/{brand}")
     public Optional<List<Car>> getByBrand(@PathVariable String brand){
         return service.findCarByBran(brand);
     }
@@ -71,7 +70,7 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
     })*/
-    @GetMapping("/model/{model}")
+    @GetMapping("/{model}")
     public List<Car> getByModel(@PathVariable String model){
         return service.findCarByModel(model);
     }
@@ -84,7 +83,7 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
     })*/
-    @GetMapping("productionYear/{productionYear}")
+    @GetMapping("/{productionYear}")
     public List<Car> getByProductionYear(@PathVariable int  productionYear){
         return service.findCarsByProductionYear(productionYear);
     }
@@ -96,7 +95,7 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
     })*/
-    @DeleteMapping("/delete/{idCar}")
+    @DeleteMapping("/{idCar}")
     public ResponseEntity<?> deleteCar(@PathVariable Long idCar){
 
         Optional<Car> C = service.findById(idCar);
@@ -113,7 +112,7 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
     })*/
-    @PostMapping("/save")
+    @PostMapping("/")
     public ResponseEntity<?> create(@Valid @RequestBody Car car,BindingResult result){
         if(result.hasErrors()){
             return validate(result);
@@ -127,7 +126,7 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
     })*/
-    @PutMapping("update/{idCar}")
+    @PutMapping("/{idCar}")
     public ResponseEntity<?> update(@PathVariable Long idCar,@RequestBody Car newCar, BindingResult result){
         if(result.hasErrors()){
             return validate(result);

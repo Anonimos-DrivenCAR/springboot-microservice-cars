@@ -101,7 +101,7 @@ import static org.mockito.Mockito.when;
             when(result.hasErrors()).thenReturn(true);
 
             when(carService.saveCar(any(Car.class))).thenReturn(car);
-            assertNotNull(carController.newCar(car,result));
+            assertNotNull(carController.create(car,result));
         }
 
 

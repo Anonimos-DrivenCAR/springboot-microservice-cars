@@ -89,6 +89,14 @@ public class CarController {
     }
 
 
+    @GetMapping("/cars-by-lessor")
+    public ResponseEntity<?> getCarsByLessor(@RequestParam List<Long> ids){
+        return ResponseEntity.ok(service.listCarsByIds(ids));
+    }
+
+
+    /**---------------------------------------------------------------------------------------*/
+
     /*@Operation( summary = "Eliminación de un Car por id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Car eliminado", content = {

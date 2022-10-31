@@ -70,4 +70,10 @@ public class carServiceImpl implements CarService {
              }
       ).get();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Car> listCarsByIds(Iterable<Long> ids) {
+        return carRepository.findAllById(ids);
+    }
 }

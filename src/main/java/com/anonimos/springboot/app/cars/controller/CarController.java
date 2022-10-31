@@ -46,9 +46,9 @@ public class CarController {
 })*/
     @GetMapping("/id/{idCar}")
     public ResponseEntity<?> getById(@PathVariable Long  idCar){
-        Optional<Car> lessorOptional = service.findById(idCar);
-        if(lessorOptional.isPresent()){
-            return ResponseEntity.ok(lessorOptional.get());
+        Optional<Car> carOptional = service.findById(idCar);
+        if(carOptional.isPresent()){
+            return ResponseEntity.ok(carOptional.get());
         }
         return ResponseEntity.notFound().build();
     }

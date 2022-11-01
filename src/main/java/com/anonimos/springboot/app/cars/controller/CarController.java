@@ -121,7 +121,7 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.saveCar(car));
     }
 
-    @Operation( summary = "Update a data Car")
+    @Operation( summary = "Update a Car by its ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Car Updated", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
@@ -137,7 +137,7 @@ public class CarController {
 
 
     /**Microservices Iteration*/
-    @Operation( summary = "List Cars by Ids")
+    @Operation( summary = "List Cars by IDs")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Cars Found", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),

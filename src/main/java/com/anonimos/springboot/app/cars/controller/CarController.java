@@ -135,7 +135,14 @@ public class CarController {
         return new ResponseEntity<>(service.updateCar(newCar, idCar), HttpStatus.OK) ;
     }
 
+
     /**Microservices Iteration*/
+    @Operation( summary = "List Cars By Ids")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Cars Found", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
+            @ApiResponse(responseCode = "404", description = "Cars not Found", content = @Content)
+    })
     @GetMapping("/cars-by-lessor")
     public ResponseEntity<?> getCarsByLessor(@RequestParam List<Long> ids){
         return ResponseEntity.ok(service.listCarsByIds(ids));

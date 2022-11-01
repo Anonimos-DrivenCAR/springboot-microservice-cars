@@ -13,11 +13,11 @@ public class SwaggerConfig {
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("Cars microservice")
-                        .description("Cars microservice Github Repository")
+                        .description("Cars microservice")
                         .version("v0.0.1")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("Cars microservice")
+                        .description("Cars microservice Github Repository")
                         .url("https://github.com/Apolosmllb/springboot-microservice-cars.git"));
     }
 }

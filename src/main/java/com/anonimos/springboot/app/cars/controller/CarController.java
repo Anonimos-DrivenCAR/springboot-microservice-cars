@@ -21,29 +21,29 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-//@Tag(name = "Cars", description = "service Web RESTFull de cars")
+@Tag(name = "Cars", description = "Microservice CARS")
 public class CarController {
 
     @Autowired
     private CarService service;
 
-    /*@Operation( summary = "Listar Car")
+    @Operation( summary = "List Cars")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Car encontrado", content = {
+            @ApiResponse(responseCode = "201", description = "Cars Found", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
-            @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
-    })*/
+            @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
+    })
     @GetMapping("/")
     public List<Car> getAll() {
         return service.findAll();
     }
 
-    /*@Operation( summary = "Buscar Car por Id")
-@ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Car encontrado", content = {
+    @Operation( summary = "Find a Car by its ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Car Found", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
-        @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
-})*/
+        @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
+    })
     @GetMapping("/id/{idCar}")
     public ResponseEntity<?> getById(@PathVariable Long  idCar){
         Optional<Car> carOptional = service.findById(idCar);
@@ -53,23 +53,24 @@ public class CarController {
         return ResponseEntity.notFound().build();
     }
 
-    /*@Operation( summary = "Buscar Car por Brand")
+    @Operation( summary = "Find a Car by its Brand")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Car encontrado", content = {
+            @ApiResponse(responseCode = "201", description = "Car Found", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
-            @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content) })*/
+            @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
+    })
     @GetMapping("/{brand}")
     public Optional<List<Car>> getByBrand(@PathVariable String brand){
         return service.findCarByBran(brand);
     }
 
 
-    /*@Operation( summary = "Buscar Car por Model")
+    @Operation( summary = "Find a Car by its Model")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Car encontrado", content = {
+            @ApiResponse(responseCode = "201", description = "Car Found", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
-            @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
-    })*/
+            @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
+    })
     @GetMapping("/model/{model}")
     public List<Car> getByModel(@PathVariable String model){
         return service.findCarByModel(model);
@@ -77,32 +78,24 @@ public class CarController {
 
 
 
-   /*@Operation( summary = "Buscar Car por ProductionYear")
+   @Operation( summary = "Find a Car by its Year of Production")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Car encontrado", content = {
+            @ApiResponse(responseCode = "201", description = "Car Found", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
-            @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
-    })*/
+            @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
+    })
     @GetMapping("/production-year/{productionYear}")
     public List<Car> getByProductionYear(@PathVariable int  productionYear){
         return service.findCarsByProductionYear(productionYear);
     }
 
 
-    @GetMapping("/cars-by-lessor")
-    public ResponseEntity<?> getCarsByLessor(@RequestParam List<Long> ids){
-        return ResponseEntity.ok(service.listCarsByIds(ids));
-    }
-
-
-    /**---------------------------------------------------------------------------------------*/
-
-    /*@Operation( summary = "Eliminación de un Car por id")
+    @Operation( summary = "Delete a Car by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Car eliminado", content = {
+            @ApiResponse(responseCode = "204", description = "Car deleted", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
-            @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
-    })*/
+            @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
+    })
     @DeleteMapping("/delete/{idCar}")
     public ResponseEntity<?> deleteCar(@PathVariable Long idCar){
 
@@ -114,12 +107,12 @@ public class CarController {
         return  ResponseEntity.notFound().build();
     }
 
-    /*@Operation( summary = "Registro de un Car")
+    @Operation( summary = "Add a new Car")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Car registrado", content = {
+            @ApiResponse(responseCode = "201", description = "Car added", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
-            @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
-    })*/
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
+    })
     @PostMapping("/")
     public ResponseEntity<?> create(@Valid @RequestBody Car car,BindingResult result){
         if(result.hasErrors()){
@@ -128,12 +121,12 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.saveCar(car));
     }
 
-    /*@Operation( summary = "Actualizacion de datos de un Car")
+    @Operation( summary = "Update a data Car")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Car actualizado", content = {
+            @ApiResponse(responseCode = "201", description = "Car Updated", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
-            @ApiResponse(responseCode = "404", description = "Car no encontrado", content = @Content)
-    })*/
+            @ApiResponse(responseCode = "404", description = "Car not found", content = @Content)
+    })
     @PutMapping("/update/{idCar}")
     public ResponseEntity<?> update(@PathVariable Long idCar,@RequestBody Car newCar, BindingResult result){
         if(result.hasErrors()){
@@ -142,6 +135,13 @@ public class CarController {
         return new ResponseEntity<>(service.updateCar(newCar, idCar), HttpStatus.OK) ;
     }
 
+    /**Microservices Iteration*/
+    @GetMapping("/cars-by-lessor")
+    public ResponseEntity<?> getCarsByLessor(@RequestParam List<Long> ids){
+        return ResponseEntity.ok(service.listCarsByIds(ids));
+    }
+
+    /**Validation*/
     private static ResponseEntity<Map<String, String>> validate(BindingResult result) {
         Map<String, String> errors = new HashMap<>();
         result.getFieldErrors().forEach(err ->{

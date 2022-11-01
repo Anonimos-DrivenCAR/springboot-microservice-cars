@@ -137,7 +137,7 @@ public class CarController {
 
 
     /**Microservices Iteration*/
-    @Operation( summary = "List Cars By Ids")
+    @Operation( summary = "List Cars by Ids")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Cars Found", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),

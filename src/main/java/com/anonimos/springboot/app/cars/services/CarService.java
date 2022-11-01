@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CarService {
-    public List<Car> findAllCars();
-    public Optional<List<Car>> findCarByBran(String manufacturer);
-    public List<Car> findCarByModel(String model);
-    public Optional <Car> findCar(Long id);
-    public List<Car> findCarsByProductionYear(int productionYear);
-    public Car saveCar(Car car);
-    public void deleteCar(Long id);
-    public Car updateCar(Car newCar,Long id);
+    List<Car> findAll();
+    Optional<List<Car>> findCarByBran(String manufacturer);
+    List<Car> findCarByModel(String model);
+    Optional <Car> findById(Long id);
+    List<Car> findCarsByProductionYear(int productionYear);
+    Car saveCar(Car car);
+    void deleteCar(Long id);
+    Car updateCar(Car newCar,Long id);
+    List<Car> listCarsByIds(Iterable<Long> ids);
 
 }

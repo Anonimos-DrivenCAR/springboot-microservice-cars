@@ -1,10 +1,12 @@
 package com.anonimos.springboot.app.cars.services.impl;
+import com.anonimos.springboot.app.cars.clients.CarClientRest;
 import com.anonimos.springboot.app.cars.entity.Car;
 import com.anonimos.springboot.app.cars.repository.CarRepository;
 import com.anonimos.springboot.app.cars.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 import java.util.List;
@@ -13,12 +15,13 @@ import java.util.List;
 public class carServiceImpl implements CarService {
     @Autowired
     private CarRepository carRepository;
-
+    @Autowired
+    private CarClientRest clientRest;
 
 
     @Override
     @Transactional(readOnly = true)
-    public List<Car> findAllCars() {
+    public List<Car> findAll() {
       return (List<Car>) carRepository.findAll();
     }
     @Override
@@ -27,14 +30,17 @@ public class carServiceImpl implements CarService {
         return Optional.ofNullable(carRepository.findCarsByBrand(bran));
     }
     @Override
+    @Transactional(readOnly = true)
     public List<Car> findCarByModel(String model) {
        return carRepository.findCarsByModel(model);
     }
+
     @Override
     @Transactional(readOnly = true)
-    public Optional<Car> findCar(Long id) {
+    public Optional<Car> findById(Long id) {
        return Optional.ofNullable(carRepository.findById(id).orElse(null));
     }
+
     @Override
     @Transactional(readOnly = true)
     public List<Car> findCarsByProductionYear(int productionYear) {
@@ -49,6 +55,7 @@ public class carServiceImpl implements CarService {
     @Transactional
     public void deleteCar(Long idCar) {
       carRepository.deleteById(idCar);
+      clientRest.deleteLessorCar(idCar);
 
     }
     @Override
@@ -69,5 +76,11 @@ public class carServiceImpl implements CarService {
                 return carRepository.save(car);
              }
       ).get();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Car> listCarsByIds(Iterable<Long> ids) {
+        return carRepository.findAllById(ids);
     }
 }

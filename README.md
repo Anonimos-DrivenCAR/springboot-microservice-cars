@@ -1,2 +1,2 @@
 # springboot-microservice-cars
-swagger documentation : https://microservice-cars.herokuapp.com/driven-car/swagger-ui/index.html#/
+swagger documentation : https://msvc-cars.herokuapp.com/swagger-ui/index.html#/

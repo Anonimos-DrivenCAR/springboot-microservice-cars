@@ -69,20 +69,7 @@ public class CarServiceTest {
         when(carRepository.save(any(Car.class))).thenReturn(car);
         assertNotNull(carService.saveCar(new Car()));
     }
-    @Test
-    void deleteCar() {
-        when(carRepository.findById(12L)).thenReturn(Optional.ofNullable(car2));
-        Optional<Car> foundcar=carService.findById(12L);
-        carRepository.deleteById(12L);
-        Optional<Car> deleted=null;
-        carService.deleteCar(12L);
-        foundcar=deleted;
 
-
-        assertNull(foundcar);
-
-
-    }
     @Test
     void updateCar(){
         when(carRepository.findById(11L)).thenReturn(Optional.ofNullable(car));

@@ -15,10 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @Tag(name = "Cars", description = "Microservice CARS")
@@ -34,8 +31,8 @@ public class CarController {
             @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
     })
     @GetMapping("/")
-    public List<Car> getAll() {
-        return service.findAll();
+    public Map<String,List<Car>> getAll() {
+        return Collections.singletonMap("cars",service.findAll());
     }
 
     @Operation( summary = "Find a Car by its ID")

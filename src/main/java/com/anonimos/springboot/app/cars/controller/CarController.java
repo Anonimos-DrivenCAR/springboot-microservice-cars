@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.*;
 
 @RestController
-@Tag(name = "Cars", description = "Microservice CARS")
+//@Tag(name = "Cars", description = "Microservice CARS")
 public class CarController {
 
     @Autowired
@@ -41,9 +41,9 @@ public class CarController {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
         @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
     })
-    @GetMapping("/id/{idCar}")
-    public ResponseEntity<?> getById(@PathVariable Long  idCar){
-        Optional<Car> carOptional = service.findById(idCar);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long  id){
+        Optional<Car> carOptional = service.findById(id);
         if(carOptional.isPresent()){
             return ResponseEntity.ok(carOptional.get());
         }
@@ -56,7 +56,7 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
     })
-    @GetMapping("/{brand}")
+    @GetMapping("brand/{brand}")
     public Optional<List<Car>> getByBrand(@PathVariable String brand){
         return service.findCarByBran(brand);
     }
@@ -93,12 +93,12 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
     })
-    @DeleteMapping("/delete/{idCar}")
-    public ResponseEntity<?> deleteCar(@PathVariable Long idCar){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteCar(@PathVariable Long id){
 
-        Optional<Car> C = service.findById(idCar);
+        Optional<Car> C = service.findById(id);
         if(C.isPresent()){
-            service.deleteCar(idCar);
+            service.deleteCar(id);
             return ResponseEntity.noContent().build();
         }
         return  ResponseEntity.notFound().build();
@@ -124,12 +124,12 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car not found", content = @Content)
     })
-    @PutMapping("/update/{idCar}")
-    public ResponseEntity<?> update(@PathVariable Long idCar,@RequestBody Car newCar, BindingResult result){
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id,@RequestBody Car newCar, BindingResult result){
         if(result.hasErrors()){
             return validate(result);
         }
-        return new ResponseEntity<>(service.updateCar(newCar, idCar), HttpStatus.OK) ;
+        return new ResponseEntity<>(service.updateCar(newCar, id), HttpStatus.OK) ;
     }
 
 

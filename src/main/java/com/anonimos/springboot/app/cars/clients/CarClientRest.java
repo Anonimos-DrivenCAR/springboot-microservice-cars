@@ -4,6 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 @FeignClient(name = "msvc-lessors", url = "${msvc.lessors.url}")
 public interface CarClientRest {
     @DeleteMapping("/delete_car/{id}")

@@ -25,7 +25,6 @@ public class CarController {
 
     @Autowired
     private CarService service;
-
     @Operation( summary = "List Cars")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Cars Found", content = {
@@ -160,4 +159,5 @@ public class CarController {
         });
         return ResponseEntity.badRequest().body(errors);
     }
+
 }

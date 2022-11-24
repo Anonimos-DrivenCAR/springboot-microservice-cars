@@ -1,4 +1,5 @@
 package com.anonimos.springboot.app.cars.controller;
+import com.anonimos.springboot.app.cars.repository.CarRepository;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.*;
 
 @RestController
+@RequestMapping(value = "/api/car")
 //@Tag(name = "Cars", description = "Microservice CARS")
 public class CarController {
 
@@ -30,7 +32,7 @@ public class CarController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Car.class)) }),
             @ApiResponse(responseCode = "404", description = "Car not Found", content = @Content)
     })
-    @GetMapping("/")
+    @GetMapping("/all")
     public Map<String,List<Car>> getAll() {
         return Collections.singletonMap("cars",service.findAll());
     }
@@ -144,6 +146,11 @@ public class CarController {
     public ResponseEntity<?> getCarsByLessor(@RequestParam List<Long> ids){
         return ResponseEntity.ok(service.listCarsByIds(ids));
     }
+
+
+
+
+
 
     /**Validation*/
     private static ResponseEntity<Map<String, String>> validate(BindingResult result) {
